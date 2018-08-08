@@ -4,44 +4,46 @@
     var leftCtrl = document.querySelector('.slider-control--left');
     var rightCtrl = document.querySelector('.slider-control--right');
     var slider = document.querySelector('#slider');
-    var transformValue = 0;
+    window.transformValue = 0;
     var itemsCollection = document.querySelectorAll('.slider_item');
-    console.log(itemsCollection);
     var slice = function(elements, start, end) {
         var sliced = Array.prototype.slice.call(elements, start, end);
         return sliced;
     };
+    window.sliderWidth = getSliderWidth(itemsCollection);
 
     slice(itemsCollection, 0, 3).forEach(function(item) {
-        console.log(item)
         item.classList.toggle('active');
     });
 
+    function getSliderWidth(itemsCollection) {
+        var count = 0;
+        itemsCollection.forEach(function(item) {
+            count+= item.offsetWidth;
+        });
+        return count;
+    }
 
     window.slider = function() {
         var itemWidth = document.querySelector('.slider_item').offsetWidth;
-        console.log(itemWidth);
-        console.log(document.querySelector('.slider_item').offsetWidth );
 
         function moveSliderLeft() {
-            transformValue = transformValue + itemWidth;
-            console.log(transformValue);
-            slider.style.transform = 'translateX(' + transformValue + 'px' + ')';
+            window.transformValue = window.transformValue + itemWidth;
+            slider.style.transform = 'translateX(' + window.transformValue + 'px' + ')';
         }
 
         function moveSliderRight() {
-            transformValue = transformValue - itemWidth;
-            console.log(transformValue);
-            slider.style.transform = 'translateX(' + transformValue + 'px' + ')';
+            window.transformValue = window.transformValue - itemWidth;
+            console.log(window.transformValue);
+            slider.style.transform = 'translateX(' + window.transformValue + 'px' + ')';
         }
 
         /*function endlessItems() {
 
         }*/
 
-        slider.
 
-
+        window.dragDrop(slider);
         leftCtrl.addEventListener('click', moveSliderLeft);
         rightCtrl.addEventListener('click', moveSliderRight);
     }();
