@@ -2,8 +2,6 @@
 
 (function() {
     window.dragDrop = function(el) {
-        var slide = document.querySelector('.slider_item').offsetWidth;
-        var transform = 0;
         window.slideMove = 0;
         el.onmousedown = function(e) {
             var startCoordinate = e.pageX;
@@ -13,11 +11,11 @@
             };
             function slideEl(bool) {
                             if (bool) {
-                                window.transformValue -= slide;
-                                el.style.transform = 'translateX(' + window.transformValue + 'px' + ')';
+                                /*window.transformValue -= slide;
+                                el.style.transform = 'translateX(' + window.transformValue + 'px' + ')';*/
                             } else {
-                                window.transformValue += slide;
-                                el.style.transform = 'translateX(' + window.transformValue + 'px' + ')';
+                                /*window.transformValue += slide;
+                                el.style.transform = 'translateX(' + window.transformValue + 'px' + ')';*/
                             }
                             //el.style.transform = 'translateX(' + (slideMove) + 'px' + ')';
 
@@ -28,9 +26,9 @@
                 console.log(start);
                 if (start == 1) {*/
                     if (startCoordinate > e.pageX) {
-                        slideEl(true);
+                        window.moveSliderRight();
                     } else if (startCoordinate < e.pageX) {
-                        slideEl(false);
+                        window.moveSliderLeft();
                     }
                     document.onmousemove = null;
 
