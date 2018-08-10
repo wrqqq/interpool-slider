@@ -17,6 +17,19 @@
         item.classList.toggle('active');
     });
 
+    itemsCollection.forEach(function(item) {
+        var p = item.querySelector('p');
+        if (p.textContent.length < 50) {
+            p.style.fontSize = 20 + 'px';
+        } else if (p.textContent.length > 50 && p.textContent.length < 100) {
+            p.style.fontSize = 17 + 'px';
+        } else if (p.textContent > 100 && p.textContent < 150) {
+            p.style.fontSize = 15 + 'px';
+        } else {
+            p.style.fontSize = 13 + 'px';
+        }
+    });
+
     function getSliderWidth(itemsCollection) {
         var count = 0;
         itemsCollection.forEach(function(item) {
@@ -29,7 +42,7 @@
     window.slider = function() {
 
         function moveSliderLeft() {
-            if (window.transformValue != 0) {
+            if (window.transformValue < -5) {
                 window.transformValue = window.transformValue + itemWidth;
                 slider.style.transform = 'translateX(' + window.transformValue + 'px' + ')';
             }
@@ -37,11 +50,9 @@
 
         function moveSliderRight() {
             if (screen.width > 1000) {
-                if (-window.transformValue <= (window.sliderWidth - (itemWidth * 3))) {
-                    console.log(-window.transformValue);
-                    console.log(window.sliderWidth - (itemWidth * 3));
+                if (-window.transformValue <= (itemsCollection.length * itemWidth - itemWidth * 4)) {
+                    console.log(itemsCollection.length * itemWidth);
                     window.transformValue = window.transformValue - itemWidth;
-                    console.log(window.transformValue);
                     slider.style.transform = 'translateX(' + window.transformValue + 'px' + ')';
                 }
             } else {

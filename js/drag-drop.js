@@ -55,6 +55,7 @@
         }
 
         function slideEnd(e) {
+            console.log(currentSlide)
             if (sliding == 2) {
                 // Reset sliding.
                 sliding = 0;
@@ -80,9 +81,12 @@
 
                 /*var style = '<style id="temp">#slider.animate{transform:translateX(' +
                     pixelOffset + 'px)}</style>';*/
+
                 var css = "body #slider.animate{transform:translateX(" + pixelOffset + "px) }</style>",
                     head = document.head || document.getElementsByTagName('head')[0],
                     style = document.createElement('style');
+
+                window.transformValue = pixelOffset;
 
                 style.id = 'temp';
 
